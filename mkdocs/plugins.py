@@ -399,7 +399,12 @@ class BasePlugin(Generic[SomeConfig]):
         return context
 
     def on_page_template(
-            self, template: jinja2.Template, template_file: str, page: Page, config: MkDocsConfig, nav: Navigation
+        self,
+        template: jinja2.Template,
+        template_file: str,
+        page: Page,
+        config: MkDocsConfig,
+        nav: Navigation,
     ) -> jinja2.Template:
         """
         The `page_template` event is called after the template for a page is created
@@ -409,7 +414,7 @@ class BasePlugin(Generic[SomeConfig]):
             template: a Jinja2 [Template](https://jinja.palletsprojects.com/en/latest/api/#jinja2.Template) object
             template_file: relative or absolute path to an html file used as template
             page: `mkdocs.structure.pages.Page` instance
-            config: global configuration objet
+            config: global configuration object
             nav: global navigation object
 
         Returns:
@@ -662,9 +667,22 @@ class PluginCollection(dict, MutableMapping[str, BasePlugin]):
         return self.run_event('page_context', context, page=page, config=config, nav=nav)
 
     def on_page_template(
-        self, template: jinja2.Template, *, template_file: str, page: Page, config: MkDocsConfig, nav: Navigation
+        self,
+        template: jinja2.Template,
+        *,
+        template_file: str,
+        page: Page,
+        config: MkDocsConfig,
+        nav: Navigation,
     ) -> jinja2.Template:
-        return self.run_event('page_template', template, template_file=template_file, page=page, config=config, nav=nav)
+        return self.run_event(
+            'page_template',
+            template,
+            template_file=template_file,
+            page=page,
+            config=config,
+            nav=nav,
+        )
 
     def on_post_page(self, output: str, *, page: Page, config: MkDocsConfig) -> str:
         return self.run_event('post_page', output, page=page, config=config)

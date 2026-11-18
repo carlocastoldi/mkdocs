@@ -128,6 +128,7 @@ class TestPluginCollection(unittest.TestCase):
                 'page_markdown': [],
                 'page_content': [plugin.on_page_content],
                 'page_context': [],
+                'page_template': [],
                 'post_page': [],
             },
         )
